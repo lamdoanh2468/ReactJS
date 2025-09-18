@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const {useState}=React;
+    function ToDoApp() {
+    const [inputValue,setInputValue] = useState('');
+    const [todos,setTodos]=useState([]);
+    const [completedSum,setCompletedSum]=useState(0);
+    const[uniqueId,setUniqueId]=useState(0);
+    let sum = todos.length;
+    let numOfCompleted =0;
+    const handleInputChange = (e)=>{setInputValue(e.target.value)};
+    const handleRemove = (id)=>setTodos(todos.filter((todo)=>{return todo.id!=id}));
+    const handleSubmit = (e)=>{
+    e.preventDefault();
+    if(inputValue.trim()){
+    setTodos([...todos,{id:uniqueId+1,text:inputValue,
+    completed:false}]);
+    setUniqueId(uniqueId+1)
+    setInputValue("");
+    }
+    }
+    const remainder = sum - completedSum;
+    return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input value={inputValue}
+         onChange={handleInputChange}
+         placeholder="Nhập task mới..." />
+        <ul>
+         
+        {todos.length==0?<h2>Chưa có task nào. Hãy thêm task đầu
+          tiên!</h2>:
+        todos.map((todo) => (
+          <li key={todo.id}>{todo.completed?<s>{todo.text} </s>:todo.text}
+            <input type="checkbox"
+            checked ={todo.completed} 
+            onChange={
+            () =>{setTodos(todos.map(t=>t.id===todo.id?{...t,completed:!t.completed}:t));
+               setCompletedSum(todo.completed ? completedSum-1 : completedSum+1);
+            }
+            }
+            />
+          <input type="button" value="Remove" onClick={()=>{handleRemove(todo.id);
+            setCompletedSum(completedSum-1);
+          }} />
+          </li>
+        ))}
+        </ul>
+        <button type="submit">Add</button>
+      </form>
+      <h2>Summary: {sum} {sum>1?"tasks":"task"} - Completed:{completedSum} - Remainder:{remainder}</h2>
+    </div>
+    );
+    }
+
+    const app = (
+
+    <>
+      <h1>To-Do List</h1>
+      <ToDoApp />
+    </>
+    );
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(app);
+
+
+
+
+  </script>
+</body>
+
+</html>
