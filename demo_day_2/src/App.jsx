@@ -1,11 +1,10 @@
-import Button from "./components/Button"
-import AppRoutes from "./components/Routes/index.jsx"
+import AppRoutes from "./components/Routes/index.jsx";
 function App() {
   return (
-    <>      
-      <AppRoutes/>
+    <>
+      <AppRoutes />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
