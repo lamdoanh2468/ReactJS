@@ -9,14 +9,13 @@ import Weather from "../src/pages/Weather/index";
 import Buttons from "../src/pages/Buttons/index";
 import Navigation from "./components/Navigation";
 
-import { HashRouter as Router, Routes, Route, HashRouter } from "react-router";
+import { BrowserRouter as Router, Routes, Route } from "react-router";
 function App() {
   return (
-    <HashRouter>
+    <Router>
       <Navigation />
-
       <Routes>
-        <Route path="/" element={<Home />}></Route>
+        <Route index element={<Home />}></Route>
         <Route path="/counter" element={<Counter />}></Route>
         <Route path="/todo" element={<Todo />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
@@ -25,7 +24,7 @@ function App() {
         <Route path="/weather" element={<Weather />}></Route>
         <Route path="/buttons" element={<Buttons />}></Route>
       </Routes>
-    </HashRouter>
+    </Router>
   );
 }
 
