@@ -1,4 +1,6 @@
-import { useParams } from "react-router";
+import { useState, useEffect } from "react";
+//TODO Importing USE-PARAMS FROM react-dom
+import { useParams } from "react-router-dom";
 
 function PostDetail() {
   const [post, setPost] = useState(null);
@@ -10,10 +12,9 @@ function PostDetail() {
         .then((res) => res.json())
         .then((post) => {
           setPost(post);
-        })
-        .finally(() => setLoading(false));
-    }, []);
-  }, 2000);
+        });
+    }, 2000);
+  }, [params.id]);
   return (
     <div>
       <h1>{post.title}</h1>

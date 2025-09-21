@@ -11,8 +11,8 @@ function News() {
           setPosts(posts);
         })
         .finally(() => setLoading(false));
-    }, []);
-  }, 2000);
+    }, 2000);
+  }, []);
 
   console.log(posts);
   return (
