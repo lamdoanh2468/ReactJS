@@ -13,6 +13,10 @@ const navItems = [
     to: "/contact",
     title: "Contact",
   },
+  {
+    to: "/use-state",
+    title: "User State",
+  },
 ];
 function Navigation() {
   return (

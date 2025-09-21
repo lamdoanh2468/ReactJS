@@ -1,23 +1,37 @@
-import { useParams } from "react-router";
-
+import { useParams, useNavigate } from "react-router";
+import { useEffect, useState } from "react";
 function PostDetail() {
   const [post, setPost] = useState(null);
   const params = useParams();
+  const navigate = useNavigate();
+
   console.log(params);
   useEffect(() => {
     setTimeout(() => {
-      fetch(`https://jsonplaceholder.typicode.com/posts/${params.id}`)
-        .then((res) => res.json())
-        .then((post) => {
-          setPost(post);
-        })
-        .finally(() => setLoading(false));
-    }, []);
-  }, 2000);
+      navigate(-1);
+      console.log("Back");
+    }, 4000);
+  });
+  useEffect(() => {
+    fetch(`https://jsonplaceholder.typicode.com/posts/${params.id}`)
+      .then((res) => {
+        if (!res.ok) {
+          navigate("/news", {
+            replace: true,
+          });
+          return;
+        }
+        return res.json();
+      })
+      .then((post) => {
+        setPost(post);
+      });
+  }, []);
+  if (!post) return <div>Loading...</div>;
   return (
     <div>
       <h1>{post.title}</h1>
-      <div>{JSON.stringify(post)}</div>
+      <div>{post.body}</div>
     </div>
   );
 }
