@@ -4,16 +4,6 @@ function News() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-<<<<<<< HEAD
-    setTimeout(() => {
-      fetch("https://jsonplaceholder.typicode.com/posts")
-        .then((res) => res.json())
-        .then((posts) => {
-          setPosts(posts);
-        })
-        .finally(() => setLoading(false));
-    }, 2000);
-=======
     fetch("https://jsonplaceholder.typicode.com/posts")
       .then((res) => {
         return res.json();
@@ -22,7 +12,6 @@ function News() {
         setPosts(posts);
       })
       .finally(() => setLoading(false));
->>>>>>> c930d95f6e1c3e727c8a180b43a1310480642620
   }, []);
 
   console.log(posts);
