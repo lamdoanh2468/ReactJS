@@ -9,10 +9,12 @@ import Dashboard from "../../pages/Dashboard";
 import PostDetail from "../../pages/PostDetail";
 import NewsTrashed from "../../pages/NewsTrashed";
 import UseState from "../../pages/UseState";
+import ScrollToTop from "../../pages/ScrollToTop/index";
 
 function AppRoutes() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Dashboard />} />
